@@ -1,0 +1,38 @@
+name: Pipeline GitHub Actions
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  cicd:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Instalação de Módulos que são necessários para a Aplicação
+        run: |
+          pip install flask
+
+      # - name: Test
+      #   run: |
+      #     python -m unittest -v test
+
+      - name: Deploy
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "devops-lab2-app-plus-pedroh"
+          heroku_email: "pedrohso90@gmail.com"
+          procfile: "web: gunicorn app:app"
+
