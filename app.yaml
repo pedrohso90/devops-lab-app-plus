@@ -1,2 +1,0 @@
-runtime: python37
-entrypoint: gunicorn --bind :$PORT app:app

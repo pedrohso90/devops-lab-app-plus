@@ -1,12 +1,12 @@
 from flask import Flask, request, render_template
 
-app = Flask(__name__)
+playlist = Flask(__name__)
 
-@app.route('/')
+@playlist.route('/')
 def my_index():
     return render_template('index.html')
 
-@app.route('/form', methods=['GET', 'POST'])
+@playlist.route('/form', methods=['GET', 'POST'])
 def func_form():
     if request.method == "POST":
        playlist = request.form["playlist"]
@@ -16,7 +16,7 @@ def func_form():
            fileObject.close()
     return render_template('form.html')
 
-@app.route('/read', methods=['GET'])
+@playlist.route('/read', methods=['GET'])
 def func_read():
     fileObject = open('playlist.data', 'r')
     fileContent = fileObject.read()
@@ -25,4 +25,4 @@ def func_read():
     return render_template('read.html', fileContent=fileContent)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    playlist.run(debug=True)

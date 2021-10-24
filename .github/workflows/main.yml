@@ -34,5 +34,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "devops-lab2-app-plus-pedroh"
           heroku_email: "pedrohso90@gmail.com"
-          procfile: "web: gunicorn app:app"
+          procfile: "web: gunicorn playlist:playlist"
 
